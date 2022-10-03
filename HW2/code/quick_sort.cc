@@ -1,3 +1,4 @@
+#include <cstdlib>
 #include <vector>
 using namespace std;
 
@@ -6,9 +7,13 @@ vector<__int128> quick_sort(vector<__int128> arr) {
     return arr;
 
   vector<__int128> arr1, arr2, sorted_arr;
-  __int128 pivot = arr[0];
+  int pivot_idx = rand() % arr.size();
+  __int128 pivot = arr[pivot_idx];
 
-  for (int i = 1; i < arr.size(); i++) {
+  for (int i = 0; i < arr.size(); i++) {
+    if (i == pivot_idx)
+      continue;
+
     if (arr[i] < pivot) {
       arr1.push_back(arr[i]);
     } else {
