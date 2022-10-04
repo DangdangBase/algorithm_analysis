@@ -2,31 +2,33 @@
 #include <vector>
 using namespace std;
 
-vector<__int128> quick_sort(vector<__int128> arr) {
-  if (arr.size() == 1 || arr.size() == 0)
-    return arr;
+void sort_arr(vector<__int128>& arr, int start, int end) {
+  int sub_arr_size = end - start + 1;
 
-  vector<__int128> arr1, arr2, sorted_arr;
-  int pivot_idx = rand() % arr.size();
-  __int128 pivot = arr[pivot_idx];
+  if (sub_arr_size <= 1)
+    return;
 
-  for (int i = 0; i < arr.size(); i++) {
-    if (i == pivot_idx)
-      continue;
+  int pivot_idx = rand() % (sub_arr_size) + start;
+  int bigger_idx = start + 1;
 
-    if (arr[i] < pivot) {
-      arr1.push_back(arr[i]);
-    } else {
-      arr2.push_back(arr[i]);
+  swap(arr[start], arr[pivot_idx]);
+
+  for (int i = start + 1; i <= end; i++) {
+    if (arr[i] < arr[start]) {
+      swap(arr[i], arr[bigger_idx++]);
     }
   }
 
-  arr1 = quick_sort(arr1);
-  arr2 = quick_sort(arr2);
+  sort_arr(arr, start + 1, bigger_idx - 1);
+  sort_arr(arr, bigger_idx, end);
 
-  sorted_arr.insert(sorted_arr.end(), arr1.begin(), arr1.end());
-  sorted_arr.push_back(pivot);
-  sorted_arr.insert(sorted_arr.end(), arr2.begin(), arr2.end());
+  for (int i = start; i < bigger_idx - 1; i++) {
+    swap(arr[i], arr[i + 1]);
+  }
+}
 
-  return sorted_arr;
+vector<__int128> quick_sort(vector<__int128> arr) {
+  sort_arr(arr, 0, arr.size() - 1);
+
+  return arr;
 }
