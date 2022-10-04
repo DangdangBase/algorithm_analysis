@@ -1,28 +1,43 @@
 #include <vector>
 using namespace std;
 
-vector<__int128> merge_sort(vector<__int128> arr) {
-  if (arr.size() == 1)
-    return arr;
+void sort_merge_arr(vector<__int128>& arr, int start, int end) {
+  int sub_arr_size = end - start + 1;
+  int mid = (start + end) / 2;
 
-  vector<__int128> arr1, arr2, sorted_arr;
-  int mid = arr.size() / 2;
+  if (sub_arr_size <= 1)
+    return;
 
-  arr1 = merge_sort(vector<__int128>(arr.begin(), arr.begin() + mid));
-  arr2 = merge_sort(vector<__int128>(arr.begin() + mid, arr.end()));
+  sort_merge_arr(arr, start, mid);
+  sort_merge_arr(arr, mid + 1, end);
 
+  vector<__int128> sorted_arr;
+  int arr1_size = mid - start + 1, arr2_size = sub_arr_size - arr1_size;
   int i = 0, j = 0;
-  while (i < arr1.size() || j < arr2.size()) {
-    __int128 push;
 
-    if (i < arr1.size() && j < arr2.size()) {
-      (arr1[i] < arr2[j]) ? push = arr1[i++] : push = arr2[j++];
+  while (i + j < sub_arr_size) {
+    if (i < arr1_size && j < arr2_size) {
+      if (arr[start + i] < arr[mid + 1 + j]) {
+        sorted_arr.push_back(arr[start + i++]);
+      } else {
+        sorted_arr.push_back(arr[mid + 1 + j++]);
+      }
     } else {
-      (i < arr1.size()) ? push = arr1[i++] : push = arr2[j++];
+      if (i < arr1_size) {
+        sorted_arr.push_back(arr[start + i++]);
+      } else {
+        sorted_arr.push_back(arr[mid + 1 + j++]);
+      }
     }
-
-    sorted_arr.push_back(push);
   }
 
-  return sorted_arr;
+  for (int i = 0; i < sub_arr_size; i++) {
+    arr[start + i] = sorted_arr[i];
+  }
+}
+
+vector<__int128> merge_sort(vector<__int128> arr) {
+  sort_merge_arr(arr, 0, arr.size() - 1);
+
+  return arr;
 }

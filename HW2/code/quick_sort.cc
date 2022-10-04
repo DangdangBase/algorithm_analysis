@@ -2,7 +2,7 @@
 #include <vector>
 using namespace std;
 
-void sort_arr(vector<__int128>& arr, int start, int end) {
+void sort_quick_arr(vector<__int128>& arr, int start, int end) {
   int sub_arr_size = end - start + 1;
 
   if (sub_arr_size <= 1)
@@ -19,8 +19,8 @@ void sort_arr(vector<__int128>& arr, int start, int end) {
     }
   }
 
-  sort_arr(arr, start + 1, bigger_idx - 1);
-  sort_arr(arr, bigger_idx, end);
+  sort_quick_arr(arr, start + 1, bigger_idx - 1);
+  sort_quick_arr(arr, bigger_idx, end);
 
   for (int i = start; i < bigger_idx - 1; i++) {
     swap(arr[i], arr[i + 1]);
@@ -28,7 +28,7 @@ void sort_arr(vector<__int128>& arr, int start, int end) {
 }
 
 vector<__int128> quick_sort(vector<__int128> arr) {
-  sort_arr(arr, 0, arr.size() - 1);
+  sort_quick_arr(arr, 0, arr.size() - 1);
 
   return arr;
 }
