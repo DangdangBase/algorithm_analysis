@@ -3,6 +3,17 @@
 #include <vector>
 using namespace std;
 
+long long compare_count = 0;
+
+bool compare(__int128 a, __int128 b) {
+  compare_count++;
+  return a < b;
+}
+
+long long get_compare_count() {
+  return compare_count;
+}
+
 __int128 str_to_bigint(string s) {
   __int128 x = 0;
 

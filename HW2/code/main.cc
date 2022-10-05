@@ -50,6 +50,9 @@ int main(int argc, char* argv[]) {
   end = clock();
 
   cout << sort_name << ' ' << problem_no << " : " << (end - start) << endl;
+  if (argc == 4 && string(argv[3]) == "compare") {
+    cout << "compare count: " << get_compare_count() << endl;
+  }
 
   file_output(sorted_arr, output_file_name);
 

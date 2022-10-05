@@ -1,4 +1,5 @@
 #include <vector>
+#include "utils.h"
 using namespace std;
 
 vector<__int128> insertion_sort(vector<__int128> arr) {
@@ -10,7 +11,7 @@ vector<__int128> insertion_sort(vector<__int128> arr) {
     bool inserted = false;
 
     for (int j = 0; j < sorted_arr.size(); j++) {
-      if (sorted_arr[j] > cur) {
+      if (compare(cur, sorted_arr[j])) {
         sorted_arr.insert(sorted_arr.begin() + j, cur);
         inserted = true;
         break;

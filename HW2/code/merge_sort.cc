@@ -1,4 +1,5 @@
 #include <vector>
+#include "utils.h"
 using namespace std;
 
 void sort_merge_arr(vector<__int128>& arr, int start, int end) {
@@ -17,7 +18,7 @@ void sort_merge_arr(vector<__int128>& arr, int start, int end) {
 
   while (i + j < sub_arr_size) {
     if (i < arr1_size && j < arr2_size) {
-      if (arr[start + i] < arr[mid + 1 + j]) {
+      if (compare(arr[start + i], arr[mid + 1 + j])) {
         sorted_arr.push_back(arr[start + i++]);
       } else {
         sorted_arr.push_back(arr[mid + 1 + j++]);

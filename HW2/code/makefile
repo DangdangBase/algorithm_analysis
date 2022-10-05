@@ -3,13 +3,13 @@ CXXFLAGS = -std=c++17
 OBJS = insertion_sort.o merge_sort.o quick_sort.o counting_sort.o mapped_counting_sort.o radix_sort.o utils.o main.o
 SRCS = $(OBJS:.o=.c)
 
-insertion_sort.o : insertion_sort.h insertion_sort.cc
+insertion_sort.o : insertion_sort.h insertion_sort.cc utils.o
 	$(CC) $(CXXFLAGS) -c insertion_sort.cc
 
-merge_sort.o : merge_sort.h merge_sort.cc
+merge_sort.o : merge_sort.h merge_sort.cc utils.o
 	$(CC) $(CXXFLAGS) -c merge_sort.cc
 
-quick_sort.o : quick_sort.h quick_sort.cc
+quick_sort.o : quick_sort.h quick_sort.cc utils.o
 	$(CC) $(CXXFLAGS) -c quick_sort.cc
 
 counting_sort.o : counting_sort.h counting_sort.cc

@@ -1,5 +1,6 @@
 #include <cstdlib>
 #include <vector>
+#include "utils.h"
 using namespace std;
 
 void sort_quick_arr(vector<__int128>& arr, int start, int end) {
@@ -14,7 +15,7 @@ void sort_quick_arr(vector<__int128>& arr, int start, int end) {
   swap(arr[start], arr[pivot_idx]);
 
   for (int i = start + 1; i <= end; i++) {
-    if (arr[i] < arr[start]) {
+    if (compare(arr[i], arr[start])) {
       swap(arr[i], arr[bigger_idx++]);
     }
   }
