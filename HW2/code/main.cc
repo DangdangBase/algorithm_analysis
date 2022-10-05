@@ -24,7 +24,6 @@ int main(int argc, char* argv[]) {
   func_map.insert(make_pair("quick", quick_sort));
   func_map.insert(make_pair("counting", counting_sort));
   func_map.insert(make_pair("mapped_counting", mapped_counting_sort));
-  func_map.insert(make_pair("radix", radix_sort));
 
   string sort_name = argv[1], problem_no = argv[2];
 
@@ -45,8 +44,21 @@ int main(int argc, char* argv[]) {
 
   clock_t start, end;
 
+  int radix_r = 4;
+  if (sort_name == "radix" && argc == 4) {
+    try {
+      radix_r = stoi(argv[3]);
+    } catch (const exception& expn) {
+      cout << "please insert r as number!" << endl;
+    }
+  }
+
   start = clock();
-  sorted_arr = func_map[sort_name](arr);
+  if (sort_name == "radix") {
+    sorted_arr = radix_sort(arr, radix_r);
+  } else {
+    sorted_arr = func_map[sort_name](arr);
+  }
   end = clock();
 
   cout << sort_name << ' ' << problem_no << " : " << (end - start) << endl;
