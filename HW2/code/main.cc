@@ -7,6 +7,7 @@
 
 #include "counting_sort.h"
 #include "insertion_sort.h"
+#include "mapped_counting_sort.h"
 #include "merge_sort.h"
 #include "quick_sort.h"
 #include "radix_sort.h"
@@ -56,6 +57,7 @@ int main(int argc, char* argv[]) {
   func_map.insert(make_pair("merge", merge_sort));
   func_map.insert(make_pair("quick", quick_sort));
   func_map.insert(make_pair("counting", counting_sort));
+  func_map.insert(make_pair("mapped_counting", mapped_counting_sort));
   func_map.insert(make_pair("radix", radix_sort));
 
   string sort_name = argv[1], problem_no = argv[2];
