@@ -1,30 +1,34 @@
 #include <vector>
 using namespace std;
 
-void bucket_sort(vector<__int128>& arr, __int128 exp, __int128 bucket_size) {
-  vector<vector<__int128>> bucket(bucket_size);
+void arged_counting_sort(vector<__int128>& arr, __int128 exp, __int128 key) {
+  __int128 sorted_arr[arr.size()];
+  vector<int> count(key, 0);
 
   for (__int128 cur : arr) {
-    __int128 cur_digit = (cur / exp) % bucket_size;
-    bucket[cur_digit].push_back(cur);
+    count[(cur / exp) % key]++;
   }
 
-  int start = 0;
-  for (vector<__int128> cur_arr : bucket) {
-    for (int i = 0; i < cur_arr.size(); i++) {
-      arr[start + i] = cur_arr[i];
-    }
+  for (int i = 1; i < key; i++) {
+    count[i] += count[i - 1];
+  }
 
-    start += cur_arr.size();
+  for (int i = arr.size() - 1; i >= 0; i--) {
+    sorted_arr[count[(arr[i] / exp) % key] - 1] = arr[i];
+    count[(arr[i] / exp) % key]--;
+  }
+
+  for (int i = 0; i < arr.size(); i++) {
+    arr[i] = sorted_arr[i];
   }
 }
 
 vector<__int128> radix_sort(vector<__int128> arr, int r) {
   __int128 max_val = *max_element(arr.begin(), arr.end());
-  __int128 bucket_size = 2 << r;
+  __int128 key = 1 << r;
 
   for (__int128 exp = 1; max_val / exp > 0; exp <<= r) {
-    bucket_sort(arr, exp, bucket_size);
+    arged_counting_sort(arr, exp, key);
   }
 
   return arr;
