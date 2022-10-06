@@ -8,14 +8,14 @@ echo '-----------insertion sort-----------'
 ./sort insertion 5
 
 echo '-----------merge sort-----------'
-./sort merge 1
+./sort merge 1 
 ./sort merge 2
 ./sort merge 3
 ./sort merge 4
 ./sort merge 5
 
 echo '-----------quick sort-----------'
-./sort quick 1
+./sort quick 1 
 ./sort quick 2
 ./sort quick 3
 ./sort quick 4
@@ -35,6 +35,3 @@ echo '-----------mapped counting sort-----------'
 echo '-----------radix sort-----------'
 ./sort radix 1
 ./sort radix 2
-./sort radix 3
-./sort radix 4
-./sort radix 5
